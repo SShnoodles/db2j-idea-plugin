@@ -1,0 +1,59 @@
+<idea-plugin>
+    <id>cc.ssnoodles.db2j-plugin</id>
+    <name>db2j</name>
+    <version>1.0.1</version>
+    <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/database2javafiles">ssnoodles</vendor>
+
+    <description>
+        <![CDATA[
+            <p>
+               这是一个帮助你数据库表生成java文件的插件。<br/>
+            </p>
+            <p>
+               支持Oracle、Postgresql、Mysql。<br/>
+            </p>
+            <p>
+               主要依赖spring、spring-data-jpa、lambok注解。<br/>
+            </p>
+            <p>
+               1 step. Database添加数据库<br/>
+               2 step. 选择表右击显示菜单<br/>
+            </p>
+        ]]>
+    </description>
+
+    <change-notes>
+        <![CDATA[
+            <p>
+                <h4>1.0.1</h4>
+                <ul>
+                    <li>支持生成仓库接口</li>
+                    <li>支持Postgresql</li>
+                    <li>支持Oracle</li>
+                </ul>
+            </p>
+            <p>
+                <h4>1.0.0</h4>
+                <ul>
+                    <li>初次提交</li>
+                </ul>
+            </p>
+        ]]>
+    </change-notes>
+
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="173"/>
+
+    <depends optional="true">com.intellij.database</depends>
+    <depends optional="true">com.intellij.modules.ultimate</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceInterface="cc.ssnoodles.plugin.services.PersistentStateService" serviceImplementation="cc.ssnoodles.plugin.services.PersistentStateService"/>
+    </extensions>
+
+    <actions>
+        <action id="db2j" class="cc.ssnoodles.plugin.MainAction" text="Db2j" description="Generating java files from database tables.">
+            <add-to-group group-id="DatabaseViewPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
