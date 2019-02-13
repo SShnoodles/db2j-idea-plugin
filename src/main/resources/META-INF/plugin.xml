@@ -1,23 +1,23 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
-    <name>db2j</name>
+    <name>Db2j</name>
     <version>1.0.2</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
         <![CDATA[
             <p>
-               这是一个帮助你数据库表生成java文件的插件。<br/>
+               This is a plugin to help you generate java files from database tables。<br/>
             </p>
             <p>
-               支持Oracle、Postgresql、Mysql。<br/>
+               Support Oracle、Postgresql、Mysql。<br/>
             </p>
             <p>
-               主要依赖spring、spring-data-jpa、lambok注解。<br/>
+               Dependence spring、spring-data-jpa、lambok annotations。<br/>
             </p>
             <p>
-               1 step. Database添加数据库<br/>
-               2 step. 选择表右击显示菜单<br/>
+               1 step. Database add db setting<br/>
+               2 step. Select the tables and right-click the display menu<br/>
             </p>
             <p>
                TODO:<br/>
@@ -39,15 +39,15 @@
             <p>
                 <h4>1.0.1</h4>
                 <ul>
-                    <li>支持生成仓库接口</li>
-                    <li>支持Postgresql</li>
-                    <li>支持Oracle</li>
+                    <li>Support generate repository interface</li>
+                    <li>Support Postgresql</li>
+                    <li>Support Oracle</li>
                 </ul>
             </p>
             <p>
                 <h4>1.0.0</h4>
                 <ul>
-                    <li>初次提交</li>
+                    <li>init</li>
                 </ul>
             </p>
         ]]>
