@@ -21,11 +21,15 @@
 ### 4、设置确认完成后，点击ok，开始生成代码。
 ![image](images/step5.png)<br>
 
+# Introduced projects
+* [db2j](https://github.com/SShnoodles/database2javafiles)
+* [lombok](https://www.projectlombok.org)
+
 # Reference projects
 * [plugin doc](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html)
 * [better-mybatis-generator](https://github.com/kmaster/better-mybatis-generator)
 
-# 开发
+# Development
 gradle.properties
 
 ideaSDKlocalPath=本地IDEA路径

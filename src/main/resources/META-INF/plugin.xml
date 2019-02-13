@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>db2j</name>
-    <version>1.0.1</version>
-    <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/database2javafiles">ssnoodles</vendor>
+    <version>1.0.2</version>
+    <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
         <![CDATA[
@@ -19,11 +19,23 @@
                1 step. Database添加数据库<br/>
                2 step. 选择表右击显示菜单<br/>
             </p>
+            <p>
+               TODO:<br/>
+               * [x] Entity<br/>
+               * [x] Repository<br/>
+               * [ ] Controller<br/>
+            </p>
         ]]>
     </description>
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.0.2</h4>
+                <ul>
+                    <li>updated config xml</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.0.1</h4>
                 <ul>
