@@ -1,23 +1,23 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
         <![CDATA[
             <p>
-               This is a plugin to help you generate java files from database tables。<br/>
+               This is a plugin to help you generate java files from database tables.<br/>
             </p>
             <p>
-               Support Oracle、Postgresql、Mysql。<br/>
+               Support Oracle、Postgresql、Mysql.<br/>
             </p>
             <p>
-               Dependence spring、spring-data-jpa、lambok annotations。<br/>
+               Dependence spring、spring-data-jpa、lambok annotations.<br/>
             </p>
             <p>
-               1 step. Database add db setting<br/>
-               2 step. Select the tables and right-click the display menu<br/>
+               1 step. Database add db setting.<br/>
+               2 step. Select the tables and right-click the display menu.<br/>
             </p>
             <p>
                TODO:<br/>
@@ -31,9 +31,21 @@
     <change-notes>
         <![CDATA[
             <p>
+                <h4>1.0.4</h4>
+                <ul>
+                    <li>Fixed repository primaryKey type</li>
+                </ul>
+            </p>
+            <p>
+                <h4>1.0.3</h4>
+                <ul>
+                    <li>Dialog label en</li>
+                </ul>
+            </p>
+            <p>
                 <h4>1.0.2</h4>
                 <ul>
-                    <li>updated config xml</li>
+                    <li>Updated config xml</li>
                 </ul>
             </p>
             <p>
@@ -42,12 +54,6 @@
                     <li>Support generate repository interface</li>
                     <li>Support Postgresql</li>
                     <li>Support Oracle</li>
-                </ul>
-            </p>
-            <p>
-                <h4>1.0.0</h4>
-                <ul>
-                    <li>init</li>
                 </ul>
             </p>
         ]]>
