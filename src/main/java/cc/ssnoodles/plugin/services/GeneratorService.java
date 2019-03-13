@@ -1,5 +1,6 @@
 package cc.ssnoodles.plugin.services;
 
+import cc.ssnoodles.db.template.*;
 import com.intellij.database.model.DasColumn;
 import com.intellij.database.model.DataType;
 import com.intellij.database.psi.DbTable;
@@ -7,7 +8,6 @@ import com.intellij.database.util.DasUtil;
 import com.intellij.util.containers.JBIterable;
 import cc.ssnoodles.db.entity.Column;
 import cc.ssnoodles.db.entity.Table;
-import cc.ssnoodles.db.template.Template;
 import cc.ssnoodles.db.util.FileUtil;
 import cc.ssnoodles.db.util.StringUtil;
 
@@ -63,10 +63,36 @@ public class GeneratorService {
                 template.tableDataToString(table));
     }
 
-    public void generateRepository(Table table, String projectPath, String domainPackage, Template template) {
+    public void generateRepository(Table table, String projectPath, String domainPackage) {
+        RepositoryTemplate template = new RepositoryTemplate();
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
-                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + "Repository",
+                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
                 template.tableDataToString(table));
+    }
+
+    public void generateController(Table table, String projectPath, String controllerPackage) {
+        ControllerTemplate controllerTemplate = new ControllerTemplate();
+        CriteriaTemplate criteriaTemplate = new CriteriaTemplate();
+        FormTemplate formTemplate = new FormTemplate();
+        DtoTemplate dtoTemplate = new DtoTemplate();
+        RefTemplate refTemplate = new RefTemplate();
+        projectPath = projectPath + "/" + controllerPackage + "/";
+        String apiDataPath = projectPath + "/data/";
+        FileUtil.write2JavaFiles(
+                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + criteriaTemplate.endsWith(),
+                criteriaTemplate.tableDataToString(table));
+        FileUtil.write2JavaFiles(
+                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + formTemplate.endsWith(),
+                formTemplate.tableDataToString(table));
+        FileUtil.write2JavaFiles(
+                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + dtoTemplate.endsWith(),
+                dtoTemplate.tableDataToString(table));
+        FileUtil.write2JavaFiles(
+                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + refTemplate.endsWith(),
+                refTemplate.tableDataToString(table));
+        FileUtil.write2JavaFiles(
+                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + controllerTemplate.endsWith(),
+                controllerTemplate.tableDataToString(table));
     }
 }

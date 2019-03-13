@@ -34,6 +34,7 @@ public class MainDialog extends JDialog {
     private JTextField domainPackage;
     private JTextField controllerPackage;
     private JCheckBox repositoryCheckBox;
+    private JCheckBox controllerCheckBox;
     private ButtonGroup buttonGroup = new ButtonGroup();
 
     private PsiElement[] psiElements;
@@ -122,7 +123,10 @@ public class MainDialog extends JDialog {
             DbFactory dbFactory = new DbFactoryImpl();
             generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()));
             if (repositoryCheckBox.isSelected()) {
-                generatorService.generateRepository(table, projectPath, domainPackage.getText(), new RepositoryTemplate());
+                generatorService.generateRepository(table, projectPath, domainPackage.getText());
+            }
+            if (controllerCheckBox.isSelected()) {
+                generatorService.generateController(table, projectPath, controllerPackage.getText());
             }
         }
 

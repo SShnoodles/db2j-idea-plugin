@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -23,13 +23,19 @@
                TODO:<br/>
                * [x] Entity<br/>
                * [x] Repository<br/>
-               * [ ] Controller<br/>
+               * [x] Controller<br/>
             </p>
         ]]>
     </description>
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.0.5</h4>
+                <ul>
+                    <li>Added controller template</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.0.4</h4>
                 <ul>

@@ -94,6 +94,14 @@
               <text value="Common"/>
             </properties>
           </component>
+          <component id="6ef73" class="javax.swing.JCheckBox" binding="controllerCheckBox" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Controller"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="6232b" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -127,7 +135,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <enabled value="false"/>
+              <enabled value="true"/>
               <text value="Controller Path"/>
             </properties>
           </component>
@@ -138,7 +146,7 @@
               </grid>
             </constraints>
             <properties>
-              <enabled value="false"/>
+              <enabled value="true"/>
               <text value="src/main/java/"/>
             </properties>
           </component>
