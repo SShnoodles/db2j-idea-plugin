@@ -77,20 +77,37 @@ public class GeneratorService {
         FormTemplate formTemplate = new FormTemplate();
         DtoTemplate dtoTemplate = new DtoTemplate();
         RefTemplate refTemplate = new RefTemplate();
+        DataMapperTemplate dataMapperTemplate = new DataMapperTemplate();
+        UpdaterTemplate updaterTemplate = new UpdaterTemplate();
+
         projectPath = projectPath + "/" + controllerPackage + "/";
         String apiDataPath = projectPath + "/data/";
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + criteriaTemplate.endsWith(),
                 criteriaTemplate.tableDataToString(table));
+
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + formTemplate.endsWith(),
                 formTemplate.tableDataToString(table));
+
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + dtoTemplate.endsWith(),
                 dtoTemplate.tableDataToString(table));
+
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + refTemplate.endsWith(),
                 refTemplate.tableDataToString(table));
+
+        FileUtil.write2IfExistFiles(
+                projectPath + dataMapperTemplate.endsWith(),
+                dataMapperTemplate.tableDataToString(table),
+                new DataMapperSimpleTemplate().tableDataToString(table));
+
+        FileUtil.write2IfExistFiles(
+                projectPath + updaterTemplate.endsWith(),
+                updaterTemplate.tableDataToString(table),
+                new UpdaterSimpleTemplate().tableDataToString(table));
+
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + controllerTemplate.endsWith(),
                 controllerTemplate.tableDataToString(table));
