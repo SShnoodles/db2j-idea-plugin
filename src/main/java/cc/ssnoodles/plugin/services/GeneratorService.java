@@ -60,7 +60,7 @@ public class GeneratorService {
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()),
-                template.tableDataToString(table));
+                domainPackage(domainPackage) + template.tableDataToString(table));
     }
 
     public void generateRepository(Table table, String projectPath, String domainPackage) {
@@ -68,7 +68,7 @@ public class GeneratorService {
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
-                template.tableDataToString(table));
+                domainPackage(domainPackage) + template.tableDataToString(table));
     }
 
     public void generateController(Table table, String projectPath, String controllerPackage) {
@@ -84,32 +84,71 @@ public class GeneratorService {
         String apiDataPath = projectPath + "/data/";
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + criteriaTemplate.endsWith(),
-                criteriaTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table));
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + formTemplate.endsWith(),
-                formTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + formTemplate.tableDataToString(table));
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + dtoTemplate.endsWith(),
-                dtoTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + dtoTemplate.tableDataToString(table));
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + refTemplate.endsWith(),
-                refTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + refTemplate.tableDataToString(table));
 
         FileUtil.write2IfExistFiles(
                 projectPath + dataMapperTemplate.endsWith(),
-                dataMapperTemplate.tableDataToString(table),
+                apiDataPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table),
                 new DataMapperSimpleTemplate().tableDataToString(table));
 
         FileUtil.write2IfExistFiles(
                 projectPath + updaterTemplate.endsWith(),
-                updaterTemplate.tableDataToString(table),
+                apiDataPackage(controllerPackage) + updaterTemplate.tableDataToString(table),
                 new UpdaterSimpleTemplate().tableDataToString(table));
 
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + controllerTemplate.endsWith(),
-                controllerTemplate.tableDataToString(table));
+                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table));
     }
+
+    private static String domainPackage(String packagePath) {
+        String parsePackage = parsePackage(packagePath);
+        String separator = System.getProperty("line.separator");
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ";" + separator + separator;
+    }
+
+    private static String apiDataPackage(String packagePath) {
+        String parsePackage = parsePackage(packagePath);
+        String separator = System.getProperty("line.separator");
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".data;" + separator + separator;
+    }
+
+    private static String parsePackage(String packagePath) {
+        String packageString = "";
+
+        int index = packagePath.indexOf("src/main/java");
+        if (index == -1) {
+            index = packagePath.indexOf("src\\main\\java");
+        }
+        if (index == -1) {
+            return packageString;
+        }
+        String substring = packagePath.substring(index + 13);
+        if (substring.contains("/")) {
+            packageString = substring.replace("/", ".");
+        }else {
+            packageString = substring.replace("\\", ".");
+        }
+
+        if (packageString.startsWith(".")) {
+            packageString = packageString.substring(1);
+        }
+        if (packageString.endsWith(".")) {
+            packageString = packageString.substring(0, packageString.length() - 1);
+        }
+        return packageString;
+    }
+
 }
