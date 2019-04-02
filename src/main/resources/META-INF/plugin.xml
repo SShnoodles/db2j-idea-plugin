@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -30,6 +30,12 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.0.7</h4>
+                <ul>
+                    <li>Added author</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.0.6</h4>
                 <ul>
@@ -72,7 +78,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="173"/>
+    <idea-version since-build="181"/>
 
     <depends optional="true">com.intellij.database</depends>
     <depends optional="true">com.intellij.modules.ultimate</depends>

@@ -59,7 +59,7 @@ public class GeneratorService {
     public void generateEntity(Table table, String projectPath, String domainPackage, Template template) {
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
-                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()),
+                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
                 domainPackage(domainPackage) + template.tableDataToString(table));
     }
 

@@ -1,13 +1,16 @@
 # Db2j idea plugin
-插件功能：在idea的database工具中使用，选择表（可多张），生成相关的代码。包括: domain、repository。
+插件功能：在idea的database工具中使用，选择表（可多张），生成相关的代码。包括: domain、repository、controller。
 
 [插件地址](https://plugins.jetbrains.com/plugin/11965-db2j)
 
 # Plugin Installation：
 - 在idea插件系统里安装:
-  - <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Browse repositories...</kbd> > <kbd>Search for "db2j"</kbd> > <kbd>Install Plugin</kbd>
+  - <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "db2j"</kbd> > <kbd>Install Plugin</kbd>
 - 手动zip安装:
   - Download the [latest release](https://github.com/SShnoodles/db2j-idea-plugin/releases) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd>
+
+# Quick Start
+![image](images/video.gif)
 
 # Using screenshots：
 ### 1、添加Database

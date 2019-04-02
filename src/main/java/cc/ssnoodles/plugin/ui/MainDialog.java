@@ -1,18 +1,19 @@
 package cc.ssnoodles.plugin.ui;
 
+import cc.ssnoodles.db.entity.Table;
+import cc.ssnoodles.db.factory.DbFactory;
+import cc.ssnoodles.db.factory.DbFactoryImpl;
+import cc.ssnoodles.db.util.FileUtil;
+import cc.ssnoodles.db.util.StringUtil;
+import cc.ssnoodles.plugin.model.Config;
 import cc.ssnoodles.plugin.model.Template;
 import cc.ssnoodles.plugin.services.GeneratorService;
 import cc.ssnoodles.plugin.services.PersistentStateService;
 import cc.ssnoodles.plugin.util.UiUtil;
-import cc.ssnoodles.plugin.model.Config;
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import cc.ssnoodles.db.entity.Table;
-import cc.ssnoodles.db.factory.DbFactory;
-import cc.ssnoodles.db.factory.DbFactoryImpl;
-import cc.ssnoodles.db.template.RepositoryTemplate;
 import org.jetbrains.annotations.SystemIndependent;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class MainDialog extends JDialog {
     private JTextField controllerPackage;
     private JCheckBox repositoryCheckBox;
     private JCheckBox controllerCheckBox;
+    private JTextField author;
     private ButtonGroup buttonGroup = new ButtonGroup();
 
     private PsiElement[] psiElements;
@@ -81,6 +83,7 @@ public class MainDialog extends JDialog {
             repositoryCheckBox.setSelected(historyConfig.isRepository());
             domainPackage.setText(historyConfig.getDomainPackage());
             controllerPackage.setText(historyConfig.getControllerPackage());
+            author.setText(historyConfig.getAuthor());
             if (Template.JPA.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
                 jpaRadioButton.setSelected(true);
             }else if (Template.DTO.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
@@ -112,9 +115,13 @@ public class MainDialog extends JDialog {
         historyConfig.setControllerPackage(controllerPackage.getText());
         historyConfig.setDomainPackage(domainPackage.getText());
         historyConfig.setRepository(repositoryCheckBox.isSelected());
+        historyConfig.setAuthor(author.getText());
         config.put("history", historyConfig);
         persistentStateService.setConfig(config);
 
+        if (!StringUtil.isEmpty(author.getText())) {
+            FileUtil.PROPERTIES.setAuthor(author.getText());
+        }
 
         GeneratorService generatorService = GeneratorService.of();
         @SystemIndependent String projectPath = project.getBasePath();

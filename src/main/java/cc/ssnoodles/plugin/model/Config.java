@@ -26,6 +26,11 @@ public class Config {
      */
     private String controllerPackage;
 
+    /**
+     * 作者
+     */
+    private String author;
+
     public boolean isRepository() {
         return repository;
     }
@@ -59,6 +64,15 @@ public class Config {
 
     public Config setControllerPackage(String controllerPackage) {
         this.controllerPackage = controllerPackage;
+        return this;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public Config setAuthor(String author) {
+        this.author = author;
         return this;
     }
 }

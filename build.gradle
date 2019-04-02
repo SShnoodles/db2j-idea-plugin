@@ -1,9 +1,9 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.2'
+    id 'org.jetbrains.intellij' version '0.4.7'
 }
 
 group 'cc.ssnoodles.plugin'
-version '1.0.6'
+version '1.0.7'
 
 sourceCompatibility = 1.8
 
@@ -12,15 +12,12 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
 repositories {
-    maven {
-        url 'http://repo.spring.io/plugins-release/'
-    }
+    maven { url 'http://repo.spring.io/plugins-release/' }
     mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'cc.ssnoodles.db', name: 'db2j', version: '2.1'
     compileOnly fileTree(include: ['*.jar'], dir: ideaSDKlocalPath + '/Contents/plugins/DatabaseTools/lib')
 }
