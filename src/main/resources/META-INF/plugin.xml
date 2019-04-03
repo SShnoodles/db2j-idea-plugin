@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -20,10 +20,10 @@
                2 step. Select the tables and right-click the display menu.<br/>
             </p>
             <p>
-               TODO:<br/>
-               * [x] Entity<br/>
-               * [x] Repository<br/>
-               * [x] Controller<br/>
+               Generate list:<br/>
+               * Entity<br/>
+               * Repository<br/>
+               * Controller<br/>
             </p>
         ]]>
     </description>
@@ -31,8 +31,16 @@
     <change-notes>
         <![CDATA[
             <p>
+                <h4>1.0.8</h4>
+                <ul>
+                    <li>Fixed put function path params</li>
+                    <li>Added some comments</li>
+                </ul>
+            </p>
+            <p>
                 <h4>1.0.7</h4>
                 <ul>
+                    <li>Update to sdk 2019.1</li>
                     <li>Added author</li>
                 </ul>
             </p>
