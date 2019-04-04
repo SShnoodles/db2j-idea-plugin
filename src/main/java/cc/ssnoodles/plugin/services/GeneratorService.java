@@ -56,22 +56,24 @@ public class GeneratorService {
         return table;
     }
 
-    public void generateEntity(Table table, String projectPath, String domainPackage, Template template) {
+    public void generateEntity(Table table, String projectPath, String domainPackage, Template template, boolean isOverWriteFiles) {
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
-                domainPackage(domainPackage) + template.tableDataToString(table));
+                domainPackage(domainPackage) + template.tableDataToString(table),
+                isOverWriteFiles);
     }
 
-    public void generateRepository(Table table, String projectPath, String domainPackage) {
+    public void generateRepository(Table table, String projectPath, String domainPackage, boolean isOverWriteFiles) {
         RepositoryTemplate template = new RepositoryTemplate();
         projectPath = projectPath + "/" + domainPackage + "/";
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
-                domainPackage(domainPackage) + template.tableDataToString(table));
+                domainPackage(domainPackage) + template.tableDataToString(table),
+                isOverWriteFiles);
     }
 
-    public void generateController(Table table, String projectPath, String controllerPackage) {
+    public void generateController(Table table, String projectPath, String controllerPackage, boolean isOverWriteFiles) {
         ControllerTemplate controllerTemplate = new ControllerTemplate();
         CriteriaTemplate criteriaTemplate = new CriteriaTemplate();
         FormTemplate formTemplate = new FormTemplate();
@@ -84,19 +86,23 @@ public class GeneratorService {
         String apiDataPath = projectPath + "/data/";
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + criteriaTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table),
+                isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + formTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + formTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + formTemplate.tableDataToString(table),
+                isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + dtoTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + dtoTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + dtoTemplate.tableDataToString(table),
+                isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
                 apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + refTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + refTemplate.tableDataToString(table));
+                apiDataPackage(controllerPackage) + refTemplate.tableDataToString(table),
+                isOverWriteFiles);
 
         FileUtil.write2IfExistFiles(
                 projectPath + dataMapperTemplate.endsWith(),
@@ -110,7 +116,8 @@ public class GeneratorService {
 
         FileUtil.write2JavaFiles(
                 projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + controllerTemplate.endsWith(),
-                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table));
+                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table),
+                isOverWriteFiles);
     }
 
     private static String domainPackage(String packagePath) {

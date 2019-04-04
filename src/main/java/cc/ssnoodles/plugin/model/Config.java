@@ -12,6 +12,16 @@ public class Config {
     private boolean repository;
 
     /**
+     * 是否生成调度类
+     */
+    private boolean controller;
+
+    /**
+     * 是否覆盖文件
+     */
+    private boolean overwriteFiles;
+
+    /**
      * 模板类型
      */
     private String templateType;
@@ -73,6 +83,24 @@ public class Config {
 
     public Config setAuthor(String author) {
         this.author = author;
+        return this;
+    }
+
+    public boolean isController() {
+        return controller;
+    }
+
+    public Config setController(boolean controller) {
+        this.controller = controller;
+        return this;
+    }
+
+    public boolean isOverwriteFiles() {
+        return overwriteFiles;
+    }
+
+    public Config setOverwriteFiles(boolean overwriteFiles) {
+        this.overwriteFiles = overwriteFiles;
         return this;
     }
 }

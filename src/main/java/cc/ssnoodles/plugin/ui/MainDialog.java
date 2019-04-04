@@ -37,6 +37,7 @@ public class MainDialog extends JDialog {
     private JCheckBox repositoryCheckBox;
     private JCheckBox controllerCheckBox;
     private JTextField author;
+    private JCheckBox overwriteFilesCheckBox;
     private ButtonGroup buttonGroup = new ButtonGroup();
 
     private PsiElement[] psiElements;
@@ -84,6 +85,8 @@ public class MainDialog extends JDialog {
             domainPackage.setText(historyConfig.getDomainPackage());
             controllerPackage.setText(historyConfig.getControllerPackage());
             author.setText(historyConfig.getAuthor());
+            controllerCheckBox.setSelected(historyConfig.isController());
+            overwriteFilesCheckBox.setSelected(historyConfig.isOverwriteFiles());
             if (Template.JPA.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
                 jpaRadioButton.setSelected(true);
             }else if (Template.DTO.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
@@ -116,6 +119,8 @@ public class MainDialog extends JDialog {
         historyConfig.setDomainPackage(domainPackage.getText());
         historyConfig.setRepository(repositoryCheckBox.isSelected());
         historyConfig.setAuthor(author.getText());
+        historyConfig.setController(controllerCheckBox.isSelected());
+        historyConfig.setOverwriteFiles(overwriteFilesCheckBox.isSelected());
         config.put("history", historyConfig);
         persistentStateService.setConfig(config);
 
@@ -128,12 +133,12 @@ public class MainDialog extends JDialog {
         for (PsiElement psiElement : psiElements) {
             Table table = generatorService.table((DbTable) psiElement);
             DbFactory dbFactory = new DbFactoryImpl();
-            generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()));
+            generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()), overwriteFilesCheckBox.isSelected());
             if (repositoryCheckBox.isSelected()) {
-                generatorService.generateRepository(table, projectPath, domainPackage.getText());
+                generatorService.generateRepository(table, projectPath, domainPackage.getText(), overwriteFilesCheckBox.isSelected());
             }
             if (controllerCheckBox.isSelected()) {
-                generatorService.generateController(table, projectPath, controllerPackage.getText());
+                generatorService.generateController(table, projectPath, controllerPackage.getText(), overwriteFilesCheckBox.isSelected());
             }
         }
 
