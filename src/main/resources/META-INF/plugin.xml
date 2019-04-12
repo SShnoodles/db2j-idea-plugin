@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.0.9</version>
+    <version>1.1.0</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -30,6 +30,13 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.1.0</h4>
+                <ul>
+                    <li>Support single table rename</li>
+                    <li>Refactor table names, like Form -> NewXXData or XXUpdate; Ref -> XXRecord</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.0.9</h4>
                 <ul>

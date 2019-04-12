@@ -38,6 +38,7 @@ public class MainDialog extends JDialog {
     private JCheckBox controllerCheckBox;
     private JTextField author;
     private JCheckBox overwriteFilesCheckBox;
+    private JTextField singleTableRename;
     private ButtonGroup buttonGroup = new ButtonGroup();
 
     private PsiElement[] psiElements;
@@ -46,14 +47,14 @@ public class MainDialog extends JDialog {
 
     private PersistentStateService persistentStateService;
 
-    public MainDialog(AnActionEvent anActionEvent) {
+    public MainDialog(AnActionEvent anActionEvent, boolean isSingleTable) {
         this.anActionEvent = anActionEvent;
 
         this.project = anActionEvent.getData(PlatformDataKeys.PROJECT);
         this.psiElements = anActionEvent.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
         persistentStateService = PersistentStateService.getInstance(project);
 
-        UiUtil.centerDialog(this,"Db2j", 600, 300);
+        UiUtil.centerDialog(this,"Db2j", 650, 350);
 
         setContentPane(contentPane);
         setModal(true);
@@ -94,7 +95,11 @@ public class MainDialog extends JDialog {
             }else {
                 commonRadioButton.setSelected(true);
             }
-
+            if (isSingleTable) {
+                singleTableRename.setEnabled(true);
+            }else {
+                singleTableRename.setEnabled(false);
+            }
         }
 
         pack();
@@ -124,8 +129,9 @@ public class MainDialog extends JDialog {
         config.put("history", historyConfig);
         persistentStateService.setConfig(config);
 
+        cc.ssnoodles.db.entity.Config properties = FileUtil.PROPERTIES;
         if (!StringUtil.isEmpty(author.getText())) {
-            FileUtil.PROPERTIES.setAuthor(author.getText());
+            properties.setAuthor(author.getText());
         }
 
         GeneratorService generatorService = GeneratorService.of();
@@ -133,12 +139,12 @@ public class MainDialog extends JDialog {
         for (PsiElement psiElement : psiElements) {
             Table table = generatorService.table((DbTable) psiElement);
             DbFactory dbFactory = new DbFactoryImpl();
-            generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()), overwriteFilesCheckBox.isSelected());
+            generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             if (repositoryCheckBox.isSelected()) {
-                generatorService.generateRepository(table, projectPath, domainPackage.getText(), overwriteFilesCheckBox.isSelected());
+                generatorService.generateRepository(table, projectPath, domainPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             }
             if (controllerCheckBox.isSelected()) {
-                generatorService.generateController(table, projectPath, controllerPackage.getText(), overwriteFilesCheckBox.isSelected());
+                generatorService.generateController(table, projectPath, controllerPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             }
         }
 

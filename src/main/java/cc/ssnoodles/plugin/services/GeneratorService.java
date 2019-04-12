@@ -29,6 +29,9 @@ public class GeneratorService {
         return G;
     }
 
+    /**
+     * assign db2j table
+     */
     public Table table(DbTable tableElement) {
         Table table = new Table();
         List<Column> columns = new ArrayList<>();
@@ -56,67 +59,76 @@ public class GeneratorService {
         return table;
     }
 
-    public void generateEntity(Table table, String projectPath, String domainPackage, Template template, boolean isOverWriteFiles) {
+    public void generateEntity(Table table, String projectPath, String domainPackage, Template template, boolean isOverWriteFiles, String newClassName) {
         projectPath = projectPath + "/" + domainPackage + "/";
+        String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
-                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
-                domainPackage(domainPackage) + template.tableDataToString(table),
+                projectPath + newFileName + template.endsWith(),
+                domainPackage(domainPackage) + template.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
 
-    public void generateRepository(Table table, String projectPath, String domainPackage, boolean isOverWriteFiles) {
+    public void generateRepository(Table table, String projectPath, String domainPackage, boolean isOverWriteFiles, String newClassName) {
         RepositoryTemplate template = new RepositoryTemplate();
         projectPath = projectPath + "/" + domainPackage + "/";
+        String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
-                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + template.endsWith(),
-                domainPackage(domainPackage) + template.tableDataToString(table),
+                projectPath + newFileName + template.endsWith(),
+                domainPackage(domainPackage) + template.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
 
-    public void generateController(Table table, String projectPath, String controllerPackage, boolean isOverWriteFiles) {
+    public void generateController(Table table, String projectPath, String controllerPackage, boolean isOverWriteFiles, String newClassName) {
         ControllerTemplate controllerTemplate = new ControllerTemplate();
         CriteriaTemplate criteriaTemplate = new CriteriaTemplate();
-        FormTemplate formTemplate = new FormTemplate();
-        DtoTemplate dtoTemplate = new DtoTemplate();
-        RefTemplate refTemplate = new RefTemplate();
+        NewDataTemplate newDataTemplate = new NewDataTemplate();
+        UpdateTemplate updateTemplate = new UpdateTemplate();
+        RecordTemplate recordTemplate = new RecordTemplate();
         DataMapperTemplate dataMapperTemplate = new DataMapperTemplate();
-        UpdaterTemplate updaterTemplate = new UpdaterTemplate();
+        UpdaterForNewTemplate updaterForNewTemplate = new UpdaterForNewTemplate();
+        UpdaterForUpdateTemplate updaterForUpdateTemplate = new UpdaterForUpdateTemplate();
 
         projectPath = projectPath + "/" + controllerPackage + "/";
         String apiDataPath = projectPath + "/data/";
+        String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
-                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + criteriaTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table),
+                apiDataPath + newFileName + criteriaTemplate.endsWith(),
+                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
-                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + formTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + formTemplate.tableDataToString(table),
+                apiDataPath + newDataTemplate.startsWith() + newFileName + newDataTemplate.endsWith(),
+                apiDataPackage(controllerPackage) + newDataTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
-                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + dtoTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + dtoTemplate.tableDataToString(table),
+                apiDataPath + newFileName + recordTemplate.endsWith(),
+                apiDataPackage(controllerPackage) + recordTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
 
         FileUtil.write2JavaFiles(
-                apiDataPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + refTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + refTemplate.tableDataToString(table),
+                apiDataPath + newFileName + updateTemplate.endsWith(),
+                apiDataPackage(controllerPackage) + updateTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
 
         FileUtil.write2IfExistFiles(
                 projectPath + dataMapperTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table),
-                new DataMapperSimpleTemplate().tableDataToString(table));
+                domainPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table, newClassName),
+                new DataMapperSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
-                projectPath + updaterTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + updaterTemplate.tableDataToString(table),
-                new UpdaterSimpleTemplate().tableDataToString(table));
+                projectPath + updaterForNewTemplate.endsWith(),
+                domainPackage(controllerPackage) + updaterForNewTemplate.tableDataToString(table, newClassName),
+                new UpdaterForNewSimpleTemplate().tableDataToString(table, newClassName));
+
+        FileUtil.write2IfExistFiles(
+                projectPath + updaterForUpdateTemplate.endsWith(),
+                domainPackage(controllerPackage) + updaterForUpdateTemplate.tableDataToString(table, newClassName),
+                new UpdaterForUpdateSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2JavaFiles(
-                projectPath + StringUtil.underlineToHumpTopUpperCase(table.getName()) + controllerTemplate.endsWith(),
-                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table),
+                projectPath + newFileName + controllerTemplate.endsWith(),
+                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
 

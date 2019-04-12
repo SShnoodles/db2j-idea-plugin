@@ -26,6 +26,7 @@ public class MainAction extends AnAction {
                 return;
             }
         }
-        new MainDialog(e);
+        boolean isSingleTable = psiElements.length == 1;
+        new MainDialog(e, isSingleTable);
     }
 }
