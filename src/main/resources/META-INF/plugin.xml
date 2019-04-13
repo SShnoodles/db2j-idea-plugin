@@ -34,7 +34,7 @@
                 <h4>1.1.0</h4>
                 <ul>
                     <li>Support single table rename</li>
-                    <li>Refactor table names, like Form -> NewXXData or XXUpdate; Ref -> XXRecord</li>
+                    <li>Refactor file names, like XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord</li>
                 </ul>
             </p>
             <p>
