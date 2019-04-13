@@ -13,6 +13,10 @@ Idea版本：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # 更新日志
+1.1.0 Ultimate 2019.1+
+* 支持单表的重命名
+* 重构一些类名，比如 XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord
+
 1.0.9 Ultimate 2019.1+
 * 支持是否覆盖文件选择
 
@@ -66,6 +70,7 @@ Idea版本：Ultimate 2019.1+
 * Controller Path: Controller类生成路径(正反斜杠都支持)
   * 单模块例子：`src/main/java/cc/ssnoodles/demo/api`
   * 多模块base模块例子：`base/src/main/java/cc/ssnoodles/demo/base/api`
+* Single rename: 单表支持重命名生成后的类和接口，默认表名驼峰格式。
   
 # 依赖项目
 * [db2j](https://github.com/SShnoodles/database2javafiles)

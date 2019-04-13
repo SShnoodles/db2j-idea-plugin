@@ -1,7 +1,7 @@
 # Db2j idea plugin
 [中文](README_CN.md)
 
-Features：use in database tool, select database tables to generate java files. includes: domain、repository、controller。
+Features：use in database tool, select database tables to generate java files. includes: domain、repository、controller.
 Idea Version：Ultimate 2019.1+
 [Plugin url](https://plugins.jetbrains.com/plugin/11965-db2j)
 
@@ -15,6 +15,10 @@ Idea Version：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # Update log
+1.1.0 Ultimate 2019.1+
+* Support single table rename
+* Refactor file names, like XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord
+
 1.0.9 Ultimate 2019.1+
 * Support overwrite files Selection 
 
@@ -70,7 +74,8 @@ Idea Version：Ultimate 2019.1+
 * Controller Path:
   * Single Module：`src/main/java/cc/ssnoodles/demo/api`
   * Multiple Modules：`base/src/main/java/cc/ssnoodles/demo/base/api`
-  
+* Single rename: Single table support rename class and interface, default table hump name.
+
 # Introduced projects
 * [db2j](https://github.com/SShnoodles/database2javafiles)
 * [lombok](https://www.projectlombok.org)
