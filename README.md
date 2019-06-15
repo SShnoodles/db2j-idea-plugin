@@ -15,6 +15,10 @@ Idea Version：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # Update log
+1.1.1 Ultimate 2019.1+
+* Fixed Do class name
+* Modified NewXXData -> XXNew
+
 1.1.0 Ultimate 2019.1+
 * Support single table rename
 * Refactor file names, like XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord
@@ -88,3 +92,7 @@ Idea Version：Ultimate 2019.1+
 gradle.properties
 
 ideaSDKlocalPath=
+
+# other
+[PredicateUtils](code.md)
+

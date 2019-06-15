@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -13,7 +13,7 @@
                Support Oracle、Postgresql、Mysql.<br/>
             </p>
             <p>
-               Dependence spring、spring-data-jpa、lambok annotations.<br/>
+               Dependence spring、spring-data-jpa、lambok、querydsl annotations.<br/>
             </p>
             <p>
                1 step. Database add db setting.<br/>
@@ -30,6 +30,13 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.1.1</h4>
+                <ul>
+                    <li>Fixed Do class name</li>
+                    <li>Modified NewXXData -> XXNew</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.1.0</h4>
                 <ul>
@@ -99,7 +106,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="181"/>
+    <idea-version since-build="181" until-build="191.*"/>
 
     <depends optional="true">com.intellij.database</depends>
     <depends optional="true">com.intellij.modules.ultimate</depends>

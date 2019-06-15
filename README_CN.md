@@ -13,6 +13,10 @@ Idea版本：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # 更新日志
+1.1.1 Ultimate 2019.1+
+* 修复Do的类名
+* 修改NewXXData -> XXNew
+
 1.1.0 Ultimate 2019.1+
 * 支持单表的重命名
 * 重构一些类名，比如 XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord
@@ -84,3 +88,6 @@ Idea版本：Ultimate 2019.1+
 gradle.properties
 
 ideaSDKlocalPath=本地IDEA路径
+
+# 其他
+[PredicateUtils](code.md)

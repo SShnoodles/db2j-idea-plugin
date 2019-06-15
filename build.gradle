@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'cc.ssnoodles.plugin'
-version '1.1.0'
+version '1.1.1'
 
 sourceCompatibility = 1.8
 
@@ -12,18 +12,26 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
 repositories {
-    maven { url 'http://repo.spring.io/plugins-release/' }
     mavenLocal()
+    maven { url 'http://repo.spring.io/plugins-release/' }
+    maven { url "https://www.jetbrains.com/intellij-repository/releases" }
+    maven { url "https://jetbrains.bintray.com/intellij-third-party-dependencies" }
     mavenCentral()
 }
 
 dependencies {
-    compile group: 'cc.ssnoodles.db', name: 'db2j', version: '2.4'
+    compile group: 'cc.ssnoodles.db', name: 'db2j', version: '2.5'
     compileOnly fileTree(include: ['*.jar'], dir: ideaSDKlocalPath + '/Contents/plugins/DatabaseTools/lib')
 }
 
+// See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
+//    version '2019.1'
+//    type 'IU'
     pluginName 'Db2j-Idea-Plugin'
+    updateSinceUntilBuild false
     localPath ideaSDKlocalPath // 本地Ultimate版本app地址
     sandboxDirectory = project.rootDir.canonicalPath + "/.sandbox"
 }
+
+buildSearchableOptions.enabled = false
