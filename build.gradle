@@ -1,9 +1,9 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.7'
+    id 'org.jetbrains.intellij' version '0.4.10'
 }
 
 group 'cc.ssnoodles.plugin'
-version '1.1.1'
+version '1.1.2'
 
 sourceCompatibility = 1.8
 
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'cc.ssnoodles.db', name: 'db2j', version: '2.5'
+    compile group: 'cc.ssnoodles.db', name: 'db2j', version: '2.6'
     compileOnly fileTree(include: ['*.jar'], dir: ideaSDKlocalPath + '/Contents/plugins/DatabaseTools/lib')
 }
 
