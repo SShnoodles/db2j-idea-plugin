@@ -2,7 +2,7 @@
 [中文](README_CN.md)
 
 Features：use in database tool, select database tables to generate java files. includes: domain、repository、controller.
-Idea Version：Ultimate 2019.1+
+Idea Version：Ultimate 2018.1+
 [Plugin url](https://plugins.jetbrains.com/plugin/11965-db2j)
 
 # Plugin Installation：
@@ -15,7 +15,10 @@ Idea Version：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # Update log
-1.1.1 Ultimate 2019.1+
+1.1.2 Ultimate 2018.1+
+* Fixed dataType scale
+
+1.1.1 Ultimate 2018.1+
 * Fixed Do class name
 * Modified NewXXData -> XXNew
 

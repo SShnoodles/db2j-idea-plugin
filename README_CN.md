@@ -1,6 +1,6 @@
 # 简介
 插件功能：在idea的database工具中使用，选择表（可多张），生成相关的代码。包括: domain、repository、controller。
-Idea版本：Ultimate 2019.1+
+Idea版本：Ultimate 2018.1+
 [插件地址](https://plugins.jetbrains.com/plugin/11965-db2j)
 
 # 插件安装：
@@ -13,7 +13,10 @@ Idea版本：Ultimate 2019.1+
 ![image](images/video.gif)
 
 # 更新日志
-1.1.1 Ultimate 2019.1+
+1.1.2 Ultimate 2018.1+
+* 修复数据类型精度转化
+
+1.1.1 Ultimate 2018.1+
 * 修复Do的类名
 * 修改NewXXData -> XXNew
 
