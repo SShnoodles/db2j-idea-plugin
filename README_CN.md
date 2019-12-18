@@ -13,6 +13,9 @@ Idea版本：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # 更新日志
+1.1.3 Ultimate 2018.1+
+* 修复Updater中Dto命名错误
+
 1.1.2 Ultimate 2018.1+
 * 修复数据类型精度转化
 

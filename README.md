@@ -15,6 +15,9 @@ Idea Version：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # Update log
+1.1.3 Ultimate 2018.1+
+* Fixed updater dto name
+
 1.1.2 Ultimate 2018.1+
 * Fixed dataType scale
 
