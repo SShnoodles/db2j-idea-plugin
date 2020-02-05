@@ -1,15 +1,17 @@
 # Db2j idea plugin
 [中文](README_CN.md)
 
+[Community(社区版)](https://github.com/SShnoodles/db2j-ce-idea-plugin)
+
 Features：use in database tool, select database tables to generate java files. includes: domain、repository、controller.
 Idea Version：Ultimate 2018.1+
 [Plugin url](https://plugins.jetbrains.com/plugin/11965-db2j)
 
 # Plugin Installation：
 - Marketplace:
-  - <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "db2j"</kbd> > <kbd>Install Plugin</kbd>
+  - **Preferences** > **Plugins** > **Marketplace** > **Search for "db2j"** > **Install Plugin**
 - Manual:
-  - Download the [zip](https://github.com/SShnoodles/db2j-idea-plugin/releases) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd>
+  - Download the [zip](https://github.com/SShnoodles/db2j-idea-plugin/releases) and install it manually using **Preferences** > **Plugins** > **Install plugin from disk...**
 
 # Quick Start
 ![image](images/video.gif)
