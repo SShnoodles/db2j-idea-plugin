@@ -13,6 +13,9 @@ Idea版本：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # 更新日志
+1.1.4 Ultimate 2018.1+
+* 添加Oracle类型
+
 1.1.3 Ultimate 2018.1+
 * 修复Updater中Dto命名错误
 

@@ -15,6 +15,9 @@ Idea Version：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # Update log
+1.1.4 Ultimate 2018.1+
+* Added oracle types
+
 1.1.3 Ultimate 2018.1+
 * Fixed updater dto name
 
