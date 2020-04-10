@@ -17,47 +17,7 @@ Idea Version：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # Update log
-1.1.4 Ultimate 2018.1+
-* Added oracle types
-
-1.1.3 Ultimate 2018.1+
-* Fixed updater dto name
-
-1.1.2 Ultimate 2018.1+
-* Fixed dataType scale
-
-1.1.1 Ultimate 2018.1+
-* Fixed Do class name
-* Modified NewXXData -> XXNew
-
-1.1.0 Ultimate 2019.1+
-* Support single table rename
-* Refactor file names, like XXForm -> NewXXData or XXUpdate; XXRef -> XXRecord
-
-1.0.9 Ultimate 2019.1+
-* Support overwrite files Selection 
-
-1.0.8 Ultimate 2019.1+
-* Fixed put function path params
-* Added some comments
-  
-1.0.7 Ultimate 2019.1+
-* Update to sdk 2019.1
-* Added author
-
-1.0.6 Ultimate 2018.3+
-* Added package
-
-1.0.5 Ultimate 2018.3+
-* Added controller template
-* Ref、Criteria、Dto、Form at the same time
-  
-1.0.4 Ultimate 2018.3+
-* Fixed repository primaryKey type
-* Support Repository class
-
-1.0.3 Ultimate 2018.3+
-* Support entity class
+[UPDATE_LOG](UPDATE_LOG.md)
 
 # Using screenshots：
 ### 1、Add Database

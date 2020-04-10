@@ -45,6 +45,7 @@ public class GeneratorService {
             column.setType(dataType.typeName);
             column.setRemarks(dasColumn.getComment());
             column.setDecimalDigits(dataType.scale > 0);
+            column.setNullable(!dasColumn.isNotNull());
 
             if (DasUtil.isPrimary(dasColumn)) {
                 column.setPrimaryKey(true);

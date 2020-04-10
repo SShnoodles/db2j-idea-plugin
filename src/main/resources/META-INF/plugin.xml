@@ -9,16 +9,27 @@
             <p>
                This is a plugin to help you generate java files from database tables.<br/>
             </p>
+            <br/>
             <p>
-               Support Oracle、Postgresql、Mysql.<br/>
+               Support relational database.<br/>
             </p>
+            <br/>
             <p>
-               Dependence spring、spring-data-jpa、lambok、querydsl annotations.<br/>
+               Dependence annotations:<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;javax.validation.*<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;javax.persistence.*<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;lombok.*<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;org.mapstruct.*<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;io.swagger.v3.oas.annotations.*<br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;And querydsl
+               &nbsp;&nbsp;&nbsp;&nbsp;And custom utils
             </p>
+            <br/>
             <p>
                1 step. Database add db setting.<br/>
                2 step. Select the tables and right-click the display menu.<br/>
             </p>
+            <br/>
             <p>
                Generate list:<br/>
                * Entity<br/>
@@ -30,6 +41,13 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.1.5</h4>
+                <ul>
+                    <li>Added swagger api annotation</li>
+                    <li>Added column annotation nullable</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.1.4</h4>
                 <ul>

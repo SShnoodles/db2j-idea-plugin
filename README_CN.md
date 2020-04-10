@@ -13,6 +13,10 @@ Idea版本：Ultimate 2018.1+
 ![image](images/video.gif)
 
 # 更新日志
+1.1.5 Ultimate 2018.1+
+* 添加swagger文档注解
+* 添加column不可为空注解属性
+
 1.1.4 Ultimate 2018.1+
 * 添加Oracle类型
 
