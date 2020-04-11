@@ -144,7 +144,7 @@
             </constraints>
             <properties>
               <enabled value="true"/>
-              <text value="Controller Path"/>
+              <text value="Api Path"/>
             </properties>
           </component>
           <component id="3ab36" class="javax.swing.JTextField" binding="controllerPackage">

@@ -61,7 +61,7 @@ public class GeneratorService {
     }
 
     public void generateEntity(Table table, String projectPath, String domainPackage, Template template, boolean isOverWriteFiles, String newClassName) {
-        projectPath = projectPath + "/" + domainPackage + "/";
+        projectPath = projectPath + "/" + domainPackage + "/models/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 projectPath + newFileName + template.endsWith(),
@@ -71,7 +71,7 @@ public class GeneratorService {
 
     public void generateRepository(Table table, String projectPath, String domainPackage, boolean isOverWriteFiles, String newClassName) {
         RepositoryTemplate template = new RepositoryTemplate();
-        projectPath = projectPath + "/" + domainPackage + "/";
+        projectPath = projectPath + "/" + domainPackage + "/repositories/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 projectPath + newFileName + template.endsWith(),
@@ -90,7 +90,9 @@ public class GeneratorService {
         UpdaterForUpdateTemplate updaterForUpdateTemplate = new UpdaterForUpdateTemplate();
 
         projectPath = projectPath + "/" + controllerPackage + "/";
-        String apiDataPath = projectPath + "/data/";
+        String apiDataPath = projectPath + "/models/";
+        String apiComponentsPath = projectPath + "/components/";
+        String apiControllersPath = projectPath + "/controllers/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 apiDataPath + newFileName + criteriaTemplate.endsWith(),
@@ -113,22 +115,22 @@ public class GeneratorService {
                 isOverWriteFiles);
 
         FileUtil.write2IfExistFiles(
-                projectPath + dataMapperTemplate.endsWith(),
+                apiComponentsPath + dataMapperTemplate.endsWith(),
                 domainPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table, newClassName),
                 new DataMapperSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
-                projectPath + updaterForNewTemplate.endsWith(),
+                apiComponentsPath + updaterForNewTemplate.endsWith(),
                 domainPackage(controllerPackage) + updaterForNewTemplate.tableDataToString(table, newClassName),
                 new UpdaterForNewSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
-                projectPath + updaterForUpdateTemplate.endsWith(),
+                apiComponentsPath + updaterForUpdateTemplate.endsWith(),
                 domainPackage(controllerPackage) + updaterForUpdateTemplate.tableDataToString(table, newClassName),
                 new UpdaterForUpdateSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2JavaFiles(
-                projectPath + newFileName + controllerTemplate.endsWith(),
+                apiControllersPath + newFileName + controllerTemplate.endsWith(),
                 domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
@@ -142,7 +144,7 @@ public class GeneratorService {
     private static String apiDataPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
         String separator = System.getProperty("line.separator");
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".data;" + separator + separator;
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + separator + separator;
     }
 
     private static String parsePackage(String packagePath) {
