@@ -29,6 +29,8 @@ public class GeneratorService {
         return G;
     }
 
+    public final static String SEPARATOR = System.getProperty("line.separator");
+
     /**
      * assign db2j table
      */
@@ -75,7 +77,7 @@ public class GeneratorService {
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 projectPath + newFileName + template.endsWith(),
-                domainPackage(domainPackage) + template.tableDataToString(table, newClassName),
+                repositoryPackage(domainPackage) + template.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
 
@@ -116,35 +118,48 @@ public class GeneratorService {
 
         FileUtil.write2IfExistFiles(
                 apiComponentsPath + dataMapperTemplate.endsWith(),
-                domainPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table, newClassName),
+                apiComponentPackage(controllerPackage) + dataMapperTemplate.tableDataToString(table, newClassName),
                 new DataMapperSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
                 apiComponentsPath + updaterForNewTemplate.endsWith(),
-                domainPackage(controllerPackage) + updaterForNewTemplate.tableDataToString(table, newClassName),
+                apiComponentPackage(controllerPackage) + updaterForNewTemplate.tableDataToString(table, newClassName),
                 new UpdaterForNewSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
                 apiComponentsPath + updaterForUpdateTemplate.endsWith(),
-                domainPackage(controllerPackage) + updaterForUpdateTemplate.tableDataToString(table, newClassName),
+                apiComponentPackage(controllerPackage) + updaterForUpdateTemplate.tableDataToString(table, newClassName),
                 new UpdaterForUpdateSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2JavaFiles(
                 apiControllersPath + newFileName + controllerTemplate.endsWith(),
-                domainPackage(controllerPackage) + controllerTemplate.tableDataToString(table, newClassName),
+                apiControllerPackage(controllerPackage) + controllerTemplate.tableDataToString(table, newClassName),
                 isOverWriteFiles);
     }
 
     private static String domainPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        String separator = System.getProperty("line.separator");
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ";" + separator + separator;
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
+    }
+
+    private static String repositoryPackage(String packagePath) {
+        String parsePackage = parsePackage(packagePath);
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".repositories;" + SEPARATOR + SEPARATOR;
+    }
+
+    private static String apiControllerPackage(String packagePath) {
+        String parsePackage = parsePackage(packagePath);
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".controllers;" + SEPARATOR + SEPARATOR;
+    }
+
+    private static String apiComponentPackage(String packagePath) {
+        String parsePackage = parsePackage(packagePath);
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".components;" + SEPARATOR + SEPARATOR;
     }
 
     private static String apiDataPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        String separator = System.getProperty("line.separator");
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + separator + separator;
+        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
     }
 
     private static String parsePackage(String packagePath) {
