@@ -1,4 +1,11 @@
 # Update log
+1.1.8 Ultimate 2018.1+
+* Added @Column length,precision,scale
+* Fixed @Schema description null
+* Fixed Mapper default method removed by mistake
+* Removed Record Dto javax.validation.* annotation
+* Removed Controller method comments
+
 1.1.7 Ultimate 2018.1+
 * Fixed import package path
 

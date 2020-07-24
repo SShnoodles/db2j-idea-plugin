@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.1.7</version>
+    <version>1.1.8</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -21,7 +21,7 @@
                &nbsp;&nbsp;&nbsp;&nbsp;lombok.*<br/>
                &nbsp;&nbsp;&nbsp;&nbsp;org.mapstruct.*<br/>
                &nbsp;&nbsp;&nbsp;&nbsp;io.swagger.v3.oas.annotations.*<br/>
-               &nbsp;&nbsp;&nbsp;&nbsp;And querydsl
+               &nbsp;&nbsp;&nbsp;&nbsp;com.querydsl.*<br/>
                &nbsp;&nbsp;&nbsp;&nbsp;And custom utils
             </p>
             <br/>
@@ -41,6 +41,22 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.1.8</h4>
+                <ul>
+                    <li>Added @Column length,precision,scale</li>
+                    <li>Fixed @Schema description null</li>
+                    <li>Fixed Mapper default method removed by mistake</li>
+                    <li>Removed Record Dto javax.validation.* annotation</li>
+                    <li>Removed Controller method comments</li>
+                </ul>
+            </p>
+            <p>
+                <h4>1.1.7</h4>
+                <ul>
+                    <li>Modified directory structure</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.1.6</h4>
                 <ul>

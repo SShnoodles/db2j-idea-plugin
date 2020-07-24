@@ -1,4 +1,14 @@
 # 更新日志
+1.1.8 Ultimate 2018.1+
+* 添加 @Column length,precision,scale 属性
+* 修复 @Schema description null
+* 修复 Mapper 类有默认方法后被错误移除
+* 移除 Record Dto类 javax.validation.* 注解
+* 移除 Controller 方法注释
+
+1.1.7 Ultimate 2018.1+
+* 修复导入包错误
+
 1.1.6 Ultimate 2018.1+
 * 更改包结构
 
