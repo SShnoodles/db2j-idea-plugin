@@ -12,9 +12,10 @@ import cc.ssnoodles.plugin.services.PersistentStateService;
 import cc.ssnoodles.plugin.util.UiUtil;
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.SystemIndependent;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -32,14 +33,15 @@ public class MainDialog extends JDialog {
     private JRadioButton jpaRadioButton;
     private JRadioButton dtoRadioButton;
     private JRadioButton commonRadioButton;
-    private JTextField domainPackage;
-    private JTextField controllerPackage;
+    private TextFieldWithBrowseButton domainPackage;
+    private TextFieldWithBrowseButton controllerPackage;
     private JCheckBox repositoryCheckBox;
     private JCheckBox controllerCheckBox;
     private JTextField author;
     private JCheckBox overwriteFilesCheckBox;
     private JTextField singleTableRename;
-    private ButtonGroup buttonGroup = new ButtonGroup();
+    private JComboBox<String> version;
+    private final ButtonGroup buttonGroup = new ButtonGroup();
 
     private PsiElement[] psiElements;
     private Project project;
@@ -60,9 +62,10 @@ public class MainDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonGroup.add(jpaRadioButton);
-        buttonGroup.add(dtoRadioButton);
-        buttonGroup.add(commonRadioButton);
+        setButtonGroup();
+        setVersion();
+        setPackageListener();
+        setControllerListener();
 
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
@@ -90,10 +93,13 @@ public class MainDialog extends JDialog {
             overwriteFilesCheckBox.setSelected(historyConfig.isOverwriteFiles());
             if (Template.JPA.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
                 jpaRadioButton.setSelected(true);
+                version.setSelectedIndex(historyConfig.getVersion());
             }else if (Template.DTO.name().equalsIgnoreCase(historyConfig.getTemplateType())) {
                 dtoRadioButton.setSelected(true);
+                version.setSelectedIndex(-1);
             }else {
                 commonRadioButton.setSelected(true);
+                version.setSelectedIndex(-1);
             }
             if (isSingleTable) {
                 singleTableRename.setEnabled(true);
@@ -126,6 +132,7 @@ public class MainDialog extends JDialog {
         historyConfig.setAuthor(author.getText());
         historyConfig.setController(controllerCheckBox.isSelected());
         historyConfig.setOverwriteFiles(overwriteFilesCheckBox.isSelected());
+        historyConfig.setVersion(version.getSelectedIndex());
         config.put("history", historyConfig);
         persistentStateService.setConfig(config);
 
@@ -135,16 +142,15 @@ public class MainDialog extends JDialog {
         }
 
         GeneratorService generatorService = GeneratorService.of();
-        @SystemIndependent String projectPath = project.getBasePath();
         for (PsiElement psiElement : psiElements) {
             Table table = generatorService.table((DbTable) psiElement);
             DbFactory dbFactory = new DbFactoryImpl();
-            generatorService.generateEntity(table, projectPath, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
+            generatorService.generateEntity(table, domainPackage.getText(), dbFactory.getTemplate(template.toLowerCase()), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             if (repositoryCheckBox.isSelected()) {
-                generatorService.generateRepository(table, projectPath, domainPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
+                generatorService.generateRepository(version.getSelectedIndex(), table, domainPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             }
             if (controllerCheckBox.isSelected()) {
-                generatorService.generateController(table, projectPath, controllerPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
+                generatorService.generateController(version.getSelectedIndex(), table, controllerPackage.getText(), overwriteFilesCheckBox.isSelected(), singleTableRename.getText());
             }
         }
 
@@ -162,5 +168,37 @@ public class MainDialog extends JDialog {
             }
         }
         return template;
+    }
+
+    private void setVersion() {
+        version.addItem("0: JpaRepository");
+        version.addItem("1: TypedRepository");
+        version.setSelectedIndex(-1);
+    }
+
+    private void setPackageListener() {
+        domainPackage.setEditable(false);
+        domainPackage.setText(project.getBasePath());
+        domainPackage.addBrowseFolderListener(null, null, project, FileChooserDescriptorFactory.createSingleFolderDescriptor());
+        controllerPackage.setEditable(false);
+        controllerPackage.setText(project.getBasePath());
+        controllerPackage.addBrowseFolderListener(null, null, project, FileChooserDescriptorFactory.createSingleFolderDescriptor());
+    }
+
+    private void setButtonGroup() {
+        buttonGroup.add(jpaRadioButton);
+        buttonGroup.add(dtoRadioButton);
+        buttonGroup.add(commonRadioButton);
+    }
+
+    private void setControllerListener() {
+        controllerCheckBox.addItemListener(event -> {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                version.setEnabled(true);
+            } else {
+                version.setSelectedIndex(0);
+                version.setEnabled(false);
+            }
+        });
     }
 }

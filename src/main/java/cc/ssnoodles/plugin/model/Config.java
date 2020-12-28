@@ -41,6 +41,11 @@ public class Config {
      */
     private String author;
 
+    /**
+     * 版本
+     */
+    private int version;
+
     public boolean isRepository() {
         return repository;
     }
@@ -102,5 +107,13 @@ public class Config {
     public Config setOverwriteFiles(boolean overwriteFiles) {
         this.overwriteFiles = overwriteFiles;
         return this;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

@@ -62,8 +62,8 @@ public class GeneratorService {
         return table;
     }
 
-    public void generateEntity(Table table, String projectPath, String domainPackage, Template template, boolean isOverWriteFiles, String newClassName) {
-        projectPath = projectPath + "/" + domainPackage + "/models/";
+    public void generateEntity(Table table, String domainPackage, Template template, boolean isOverWriteFiles, String newClassName) {
+        String projectPath = domainPackage + "/models/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 projectPath + newFileName + template.endsWith(),
@@ -71,9 +71,10 @@ public class GeneratorService {
                 isOverWriteFiles);
     }
 
-    public void generateRepository(Table table, String projectPath, String domainPackage, boolean isOverWriteFiles, String newClassName) {
+    public void generateRepository(int version, Table table, String domainPackage, boolean isOverWriteFiles, String newClassName) {
+        if (version != 0) return;
         RepositoryTemplate template = new RepositoryTemplate();
-        projectPath = projectPath + "/" + domainPackage + "/repositories/";
+        String projectPath = domainPackage + "/repositories/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
         FileUtil.write2JavaFiles(
                 projectPath + newFileName + template.endsWith(),
@@ -81,30 +82,25 @@ public class GeneratorService {
                 isOverWriteFiles);
     }
 
-    public void generateController(Table table, String projectPath, String controllerPackage, boolean isOverWriteFiles, String newClassName) {
-        ControllerTemplate controllerTemplate = new ControllerTemplate();
-        CriteriaTemplate criteriaTemplate = new CriteriaTemplate();
-        NewDataTemplate newDataTemplate = new NewDataTemplate();
-        UpdateTemplate updateTemplate = new UpdateTemplate();
-        RecordTemplate recordTemplate = new RecordTemplate();
-        DataMapperTemplate dataMapperTemplate = new DataMapperTemplate();
-        UpdaterForNewTemplate updaterForNewTemplate = new UpdaterForNewTemplate();
-        UpdaterForUpdateTemplate updaterForUpdateTemplate = new UpdaterForUpdateTemplate();
+    public void generateController(int version, Table table, String controllerPackage, boolean isOverWriteFiles, String newClassName) {
+        var controllerTemplate = version == 0 ? new ControllerTemplate() : new ControllerTypedTemplate();
+        var criteriaTemplate = new CriteriaTemplate();
+        var updateTemplate = new UpdateTemplate();
+        var recordTemplate = new InfoTemplate();
+        var dataMapperTemplate = new DataMapperTemplate();
+        var updaterForUpdateTemplate = new UpdaterForUpdateTemplate();
 
-        projectPath = projectPath + "/" + controllerPackage + "/";
+        String projectPath = controllerPackage + "/";
         String apiDataPath = projectPath + "/models/";
         String apiComponentsPath = projectPath + "/components/";
         String apiControllersPath = projectPath + "/controllers/";
         String newFileName = StringUtil.isEmpty(newClassName) ? StringUtil.underlineToHumpTopUpperCase(table.getName()) : newClassName;
-        FileUtil.write2JavaFiles(
-                apiDataPath + newFileName + criteriaTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table, newClassName),
-                isOverWriteFiles);
-
-        FileUtil.write2JavaFiles(
-                apiDataPath + newDataTemplate.startsWith() + newFileName + newDataTemplate.endsWith(),
-                apiDataPackage(controllerPackage) + newDataTemplate.tableDataToString(table, newClassName),
-                isOverWriteFiles);
+        if (version == 0) {
+            FileUtil.write2JavaFiles(
+                    apiDataPath + newFileName + criteriaTemplate.endsWith(),
+                    apiDataPackage(controllerPackage) + criteriaTemplate.tableDataToString(table, newClassName),
+                    isOverWriteFiles);
+        }
 
         FileUtil.write2JavaFiles(
                 apiDataPath + newFileName + recordTemplate.endsWith(),
@@ -122,11 +118,6 @@ public class GeneratorService {
                 new DataMapperSimpleTemplate().tableDataToString(table, newClassName));
 
         FileUtil.write2IfExistFiles(
-                apiComponentsPath + updaterForNewTemplate.endsWith(),
-                apiComponentPackage(controllerPackage) + updaterForNewTemplate.tableDataToString(table, newClassName),
-                new UpdaterForNewSimpleTemplate().tableDataToString(table, newClassName));
-
-        FileUtil.write2IfExistFiles(
                 apiComponentsPath + updaterForUpdateTemplate.endsWith(),
                 apiComponentPackage(controllerPackage) + updaterForUpdateTemplate.tableDataToString(table, newClassName),
                 new UpdaterForUpdateSimpleTemplate().tableDataToString(table, newClassName));
@@ -139,27 +130,27 @@ public class GeneratorService {
 
     private static String domainPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
+        return "".equals(parsePackage) ? "package domain.models;" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
     }
 
     private static String repositoryPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".repositories;" + SEPARATOR + SEPARATOR;
+        return "".equals(parsePackage) ? "package domain.repositories;" : "package " + parsePackage + ".repositories;" + SEPARATOR + SEPARATOR;
     }
 
     private static String apiControllerPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".controllers;" + SEPARATOR + SEPARATOR;
+        return "".equals(parsePackage) ? "package api.controllers;" : "package " + parsePackage + ".controllers;" + SEPARATOR + SEPARATOR;
     }
 
     private static String apiComponentPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".components;" + SEPARATOR + SEPARATOR;
+        return "".equals(parsePackage) ? "package api.components;" : "package " + parsePackage + ".components;" + SEPARATOR + SEPARATOR;
     }
 
     private static String apiDataPackage(String packagePath) {
         String parsePackage = parsePackage(packagePath);
-        return "".equals(parsePackage) ? "" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
+        return "".equals(parsePackage) ? "package api.models;" : "package " + parsePackage + ".models;" + SEPARATOR + SEPARATOR;
     }
 
     private static String parsePackage(String packagePath) {

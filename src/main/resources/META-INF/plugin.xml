@@ -1,13 +1,13 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.1.8</version>
+    <version>1.2.0</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
         <![CDATA[
             <p>
-               This is a plugin to help you generate java files from database tables.<br/>
+               Help you generate java files from database tables.<br/>
             </p>
             <br/>
             <p>
@@ -41,6 +41,16 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.2.0</h4>
+                <ul>
+                    <li>Updated jdk11</li>
+                    <li>Added Version selection for private(Just select first one For you)</li>
+                    <li>Added Controller patch method function</li>
+                    <li>Removed New Dto</li>
+                    <li>Fixed some known problems</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.1.8</h4>
                 <ul>
