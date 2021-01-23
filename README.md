@@ -18,6 +18,7 @@ Idea Version：Ultimate 2018.1+
 
 # Update log
 [UPDATE_LOG](UPDATE_LOG.md)
+[更新日志](UPDATE_LOG_CN.md)
 
 # Using screenshots：
 ### 1、Add Database

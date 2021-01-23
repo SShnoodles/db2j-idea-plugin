@@ -1,4 +1,11 @@
 # 更新日志
+1.2.0 Ultimate 2018.1+
+* 更新到jdk11
+* 添加版本选择
+* 添加 Controller的Patch方法
+* 移除 New Dto
+* 修复一些BUG
+
 1.1.8 Ultimate 2018.1+
 * 添加 @Column length,precision,scale 属性
 * 修复 @Schema description null

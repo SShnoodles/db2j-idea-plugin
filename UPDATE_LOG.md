@@ -1,4 +1,11 @@
 # Update log
+1.2.0 Ultimate 2018.1+
+* Updated jdk11
+* Added Version selection for private(Just select first one For you)
+* Added Controller patch method function
+* Removed New Dto
+* Fixed some known problems
+
 1.1.8 Ultimate 2018.1+
 * Added @Column length,precision,scale
 * Fixed @Schema description null
