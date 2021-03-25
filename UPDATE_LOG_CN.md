@@ -1,4 +1,7 @@
 # 更新日志
+1.2.1 Ultimate 2018.1+
+* 修复char、varchar默认为0
+
 1.2.0 Ultimate 2018.1+
 * 更新到jdk11
 * 添加版本选择

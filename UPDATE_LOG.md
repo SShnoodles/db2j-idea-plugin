@@ -1,4 +1,7 @@
 # Update log
+1.2.1 Ultimate 2018.1+
+* Fixed char varchar default 0
+
 1.2.0 Ultimate 2018.1+
 * Updated jdk11
 * Added Version selection for private(Just select first one For you)

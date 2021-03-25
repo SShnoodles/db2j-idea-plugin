@@ -1,7 +1,6 @@
 <idea-plugin>
     <id>cc.ssnoodles.db2j-plugin</id>
     <name>Db2j</name>
-    <version>1.2.0</version>
     <vendor email="ssnoodles0226@gmail.com" url="https://github.com/SShnoodles/db2j-idea-plugin">ssnoodles</vendor>
 
     <description>
@@ -41,6 +40,12 @@
 
     <change-notes>
         <![CDATA[
+            <p>
+                <h4>1.2.1</h4>
+                <ul>
+                    <li>Fixed char varchar default 0</li>
+                </ul>
+            </p>
             <p>
                 <h4>1.2.0</h4>
                 <ul>
